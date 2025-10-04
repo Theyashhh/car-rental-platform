@@ -9,7 +9,7 @@ import bookingRouter from "./routes/bookingRoutes.js";
 const app = express();
 
 app.use(cors({
-  origin: "car-rental-platform-server-lime.vercel.app", 
+  origin: "https://car-rental-platform-neon.vercel.app", 
   credentials: true
 }));
 
