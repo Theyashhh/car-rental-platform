@@ -36,6 +36,10 @@ export const AppProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+  fetchCars();
+}, []);
+
   const fetchUser = async () => {
     try {
       const { data } = await api.get("/api/user/data");
