@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const AppContext = createContext();
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
+  baseURL: import.meta.env.VITE_BASE_URL,
   withCredentials: false,
 });
 
@@ -17,6 +17,7 @@ export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isOwner, setIsOwner] = useState(false);
   const [cars, setCars] = useState([]);
+  const [showLogin, setShowLogin] = useState(false);
 
   // Attach token automatically
   useEffect(() => {
@@ -76,6 +77,9 @@ export const AppProvider = ({ children }) => {
     fetchUser,
     fetchCars,
     logout,
+    navigate,       
+    showLogin,     
+    setShowLogin,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
