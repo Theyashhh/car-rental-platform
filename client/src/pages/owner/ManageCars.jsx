@@ -7,13 +7,13 @@ import toast from 'react-hot-toast'
 
 const ManageCars = () => {
 
-  const {isOwner, axios, currency} = useAppContext()
+  const {isOwner, api, currency} = useAppContext()
 
   const [cars, setCars] = useState([])
 
   const fetchOwnerCars = async ()=>{
     try {
-      const {data} = await axios.get('/api/owner/cars')
+      const {data} = await api.get('/api/owner/cars')
       if(data.success){
         setCars(data.cars)
       }else{
@@ -28,7 +28,7 @@ const ManageCars = () => {
 
   const toggleAvailability = async (carId)=>{
     try {
-      const {data} = await axios.post('/api/owner/toggle-car', {carId})
+      const {data} = await api.post('/api/owner/toggle-car', {carId})
       if(data.success){
         toast.success(data.message)
         fetchOwnerCars()
@@ -48,7 +48,7 @@ const ManageCars = () => {
 
         if(!confirm) return null
       
-      const {data} = await axios.post('/api/owner/delete-car', {carId})
+      const {data} = await api.post('/api/owner/delete-car', {carId})
       if(data.success){
         toast.success(data.message)
         fetchOwnerCars()

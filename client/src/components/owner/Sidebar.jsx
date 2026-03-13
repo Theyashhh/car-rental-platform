@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 const Sidebar = () => {
 
-  const {user, axios, fetchUser} = useAppContext();
+  const {user, api, fetchUser} = useAppContext();
   const location = useLocation()
   const [image, setImage] = useState('')
 
@@ -16,7 +16,7 @@ const Sidebar = () => {
       const formData = new FormData()
       formData.append('image', image)
 
-      const {data} = await axios.post('/api/owner/update-image', formData)
+      const {data} = await api.post('/api/owner/update-image', formData)
 
       if(data.success){
         fetchUser()

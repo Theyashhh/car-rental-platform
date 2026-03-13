@@ -5,13 +5,13 @@ import toast from 'react-hot-toast'
 
 const ManageBookings = () => {
 
-  const {currency, axios} = useAppContext()
+  const {currency, api} = useAppContext()
 
   const [bookings, setBookings] = useState([])
 
   const fetchOwnerBookings = async ()=>{
    try {
-    const {data} = await axios.get('/api/bookings/owner')
+    const {data} = await api.get('/api/bookings/owner')
     data.success ? setBookings(data.bookings) : toast.error(data.message)
    } catch (error) {
     toast.error(error.message)
@@ -22,7 +22,7 @@ const ManageBookings = () => {
 
   const changeBookingStatus = async (bookingId, status)=>{
    try {
-    const {data} = await axios.post('/api/bookings/change-status', {bookingId, status})
+    const {data} = await api.post('/api/bookings/change-status', {bookingId, status})
     if(data.success){
       toast.success(data.message)
       fetchOwnerBookings()

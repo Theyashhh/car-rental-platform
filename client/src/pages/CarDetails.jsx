@@ -9,7 +9,7 @@ import {delay, easeOut, motion} from 'motion/react'
 const CarDetails = () => {
 
   const {id} = useParams()
-  const {cars, axios, pickupDate, setPickupDate, returnDate, setReturnDate} = useAppContext()
+  const {cars, api, pickupDate, setPickupDate, returnDate, setReturnDate} = useAppContext()
   const navigate = useNavigate()
   const [car, setCar] = useState(null)
   const currency = import.meta.env.VITE_CURRENCY
@@ -17,7 +17,7 @@ const CarDetails = () => {
   const handleSubmit = async(e)=> {
   e.preventDefault();
   try {
-    const {data} = await axios.post('/api/bookings/create', {
+    const {data} = await api.post('/api/bookings/create', {
       car: id,
       pickupDate,
       returnDate

@@ -3,13 +3,12 @@ import Title from '../../components/owner/Title'
 import { assets } from '../../assets/assets'
 import { useAppContext } from '../../context/AppContext'
 import toast from 'react-hot-toast'
-import axios from "axios"
 
 
 
 const AddCar = () => {
 
-    const {axios, currency, fetchCars } = useAppContext()
+    const {api, currency, fetchCars } = useAppContext()
   
     const [image, setImage] = useState(null)
     const [car, setCar] = useState({
@@ -35,7 +34,7 @@ const AddCar = () => {
           formData.append('image', image)
           formData.append('carData', JSON.stringify(car))
 
-          const{data} = await axios.post('/api/owner/add-car', formData)
+          const{data} = await api.post('/api/owner/add-car', formData)
 
 
           if(data.success){

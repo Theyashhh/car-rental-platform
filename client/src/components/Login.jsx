@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 const Login = () => {
 
-    const {setShowLogin, axios, setToken, navigate} = useAppContext()
+    const {setShowLogin, api, setToken, navigate} = useAppContext()
     // Using prebuilt UI
 
      const [state, setState] = React.useState("login");
@@ -15,7 +15,7 @@ const Login = () => {
     const onSubmitHandler = async (event)=>{
        try {
          event.preventDefault();
-         const {data} = await axios.post(`/api/user/${state}`, {name, email, password})
+         const {data} = await api.post(`/api/user/${state}`, {name, email, password})
 
          if(data.success){
             navigate('/')

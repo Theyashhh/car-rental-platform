@@ -9,7 +9,7 @@ import {motion} from 'motion/react'
 
 const Navbar = () => {
 
-  const {setShowLogin, token, user, logout, isOwner, axios, setIsOwner} = useAppContext ()
+  const {setShowLogin, token, user, logout, isOwner, api, setIsOwner} = useAppContext ()
 
   const location = useLocation()
   const [open, setOpen] = useState(false)
@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const changeRole = async ()=>{
     try {
-     const {data} = await axios.post('/api/owner/change-role')
+     const {data} = await api.post('/api/owner/change-role')
      if(data.success) {
       setIsOwner(true)
       toast.success(data.message)

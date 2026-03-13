@@ -8,14 +8,36 @@ import bookingRouter from "./routes/bookingRoutes.js";
 
 const app = express();
 
-app.use(cors({
-  origin: "https://car-rental-platform-client.onrender.com",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-}));
+/* ✅ CORRECT CORS CONFIG */
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://car-rental-platform-client.onrender.com"
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin (Postman, curl)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+  })
+);
+
+/* ✅ VERY IMPORTANT */
+app.options("/*", cors());
 
 app.use(express.json());
 
-// Routes should be registered BEFORE listen
+/* Routes */
 app.get("/", (req, res) => res.send("Server is running"));
 app.use("/api/user", userRouter);
 app.use("/api/owner", ownerRouter);
