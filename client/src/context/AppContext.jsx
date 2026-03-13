@@ -73,6 +73,7 @@ export const AppProvider = ({ children }) => {
     user,
     setUser,
     isOwner,
+    setIsOwner,
     cars,
     fetchUser,
     fetchCars,
